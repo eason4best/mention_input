@@ -148,12 +148,12 @@ class _MentionInputState extends State<MentionInput> {
     widget.onChanged?.call(_controller.text);
     final cursorPos = _controller.selection.baseOffset;
     final fullText = _controller.text;
-    if (fullText.endsWith('@') &&
+    /*if (fullText.endsWith('@') &&
         fullText.length > 1 &&
-        fullText[_controller.selection.base.offset - 1] != ' ') {
-      _controller.text = _controller.text
-          .replaceRange(_controller.selection.base.offset - 1, null, ' @');
-    }
+        fullText[cursorPos - 1] != ' ') {
+      _controller.text =
+          _controller.text.replaceRange(cursorPos - 1, null, ' @');
+    }*/
 
     if (fullText.isNotEmpty && cursorPos > 0) {
       var leftPos = cursorPos - 1;
