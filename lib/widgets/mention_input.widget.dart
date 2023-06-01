@@ -149,7 +149,7 @@ class _MentionInputState extends State<MentionInput> {
     final cursorPos = _controller.selection.baseOffset;
     final fullText = _controller.text;
     if (fullText.endsWith('@') && fullText[cursorPos - 1] != ' ') {
-      _controller.text.replaceRange(cursorPos, null, ' @');
+      _controller.text = _controller.text.replaceRange(cursorPos, null, ' @');
     }
 
     if (fullText.isNotEmpty && cursorPos > 0) {
