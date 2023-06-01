@@ -9,7 +9,7 @@ class SuggestionSection extends StatelessWidget {
   final Decoration? decoration;
   final BorderRadius? borderRadius;
   final Color? color;
-  final Function(String replaceText) addMention;
+  final Function(MentionData mentionData) onAddMention;
   final bool? dividerBetweenItems;
   final List<MentionData> suggestionList;
   final Widget Function(int index, MentionData data)? itemBuilder;
@@ -17,7 +17,7 @@ class SuggestionSection extends StatelessWidget {
   const SuggestionSection(
       {super.key,
       required this.itemHeight,
-      required this.addMention,
+      required this.onAddMention,
       required this.suggestionList,
       this.margin,
       this.decoration,
@@ -51,7 +51,7 @@ class SuggestionSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: () => addMention(mention.display),
+                    onTap: () => onAddMention(mention),
                     child: itemBuilder?.call(index, mention) ??
                         SizedBox(
                           width: double.infinity,

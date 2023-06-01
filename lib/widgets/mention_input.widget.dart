@@ -40,6 +40,7 @@ class MentionInput extends StatefulWidget {
   bool shouldHideLeftWidgets;
   bool shouldHideRightWidgets;
   Function(String value)? onChanged;
+  Function(MentionData mentionData)? onAddMention;
   Color? cursorColor;
   TextInputType? keyboardType;
   int? minLines;
@@ -92,6 +93,7 @@ class MentionInput extends StatefulWidget {
       this.shouldHideLeftWidgets = false,
       this.shouldHideRightWidgets = false,
       this.onChanged,
+      this.onAddMention,
       this.cursorColor,
       this.keyboardType,
       this.minLines,
@@ -219,19 +221,19 @@ class _MentionInputState extends State<MentionInput> {
     }
   }
 
-  void addMention(String replaceText) {
+  void onAddMention(MentionData mentionData) {
     if (selectionWord == null) return;
 
     final annotation = selectionWord!.text[0];
     _controller.text = _controller.value.text.replaceRange(
         selectionWord!.startIdx == 0 ? 0 : selectionWord!.startIdx + 1,
         selectionWord!.endIdx,
-        "$annotation$replaceText ");
+        "$annotation${mentionData.display} ");
 
     final startIdx =
         selectionWord!.startIdx == 0 ? 1 : selectionWord!.startIdx + 2;
 
-    final currentCursor = startIdx + replaceText.length + 1;
+    final currentCursor = startIdx + mentionData.display.length + 1;
 
     _controller.selection =
         TextSelection.fromPosition(TextPosition(offset: currentCursor));
@@ -239,6 +241,9 @@ class _MentionInputState extends State<MentionInput> {
     focusNode.requestFocus();
 
     selectionWord = null;
+    if (widget.onAddMention != null) {
+      widget.onAddMention!(mentionData);
+    }
   }
 
   @override
@@ -299,7 +304,7 @@ class _MentionInputState extends State<MentionInput> {
           widthFactor: 1),
       portalFollower: SuggestionSection(
         itemHeight: widget.itemHeight,
-        addMention: addMention,
+        onAddMention: onAddMention,
         suggestionList: suggestionList,
         itemBuilder: widget.itemBuilder,
         padding: widget.suggestionContainerPadding,
