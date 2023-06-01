@@ -11,4 +11,26 @@ class MentionData {
     this.imageUrl,
     this.customData,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'display': display,
+      'imageUrl': imageUrl,
+      'customData': customData,
+    };
+  }
+
+  factory MentionData.fromMap(Map<String, dynamic> data) {
+    final String id = data['id'];
+    final String display = data['display'];
+    final String? imageUrl = data['imageUrl'];
+    final Map<String, dynamic>? customData = data['customData'];
+    return MentionData(
+      id: id,
+      display: display,
+      imageUrl: imageUrl,
+      customData: customData,
+    );
+  }
 }
