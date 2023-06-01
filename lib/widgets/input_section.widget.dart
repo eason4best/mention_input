@@ -83,13 +83,7 @@ class InputSection extends StatelessWidget {
       autofocus: autoFocus ?? false,
       decoration: InputDecoration(
         hintText: placeHolder ?? "Aa",
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.transparent,
-            width: 0,
-          ),
-          borderRadius: BorderRadius.zero,
-        ),
+        border: const OutlineInputBorder(borderSide: BorderSide.none),
       ),
     );
   }
