@@ -145,20 +145,12 @@ class _MentionInputState extends State<MentionInput> {
   }
 
   void _suggestionListener() {
-    if (_controller.text.isNotEmpty) {
-      setState(() {
-        shouldShowSendButton = true;
-      });
-    } else {
-      setState(() {
-        shouldShowSendButton = false;
-      });
-    }
-
     widget.onChanged?.call(_controller.text);
-
     final cursorPos = _controller.selection.baseOffset;
     final fullText = _controller.text;
+    if (fullText.endsWith('@') && fullText[cursorPos - 1] != ' ') {
+      _controller.text.replaceRange(cursorPos, null, ' @');
+    }
 
     if (fullText.isNotEmpty && cursorPos > 0) {
       var leftPos = cursorPos - 1;
