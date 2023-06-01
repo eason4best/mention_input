@@ -156,6 +156,7 @@ class _MentionInputState extends State<MentionInput> {
     }
 
     widget.onChanged?.call(_controller.text);
+    print(allMentionWords.length);
 
     final cursorPos = _controller.selection.baseOffset;
     final fullText = _controller.text;
