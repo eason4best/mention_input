@@ -82,7 +82,15 @@ class InputSection extends StatelessWidget {
       focusNode: focusNode,
       autofocus: autoFocus ?? false,
       decoration: InputDecoration(
-          hintText: placeHolder ?? "Aa", border: InputBorder.none),
+        hintText: placeHolder ?? "Aa",
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.transparent,
+            width: 0,
+          ),
+          borderRadius: BorderRadius.zero,
+        ),
+      ),
     );
   }
 }
